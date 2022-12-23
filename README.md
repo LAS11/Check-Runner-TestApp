@@ -1,9 +1,8 @@
-# (CheckRunner)
- A Java app that can create a store cash receipts. output them onto console and save them in a txt-file
+# CheckRunner: a Java app that can create a store cash receipts, output them onto console and save them in a txt-file
 
-OC: Windows 10
-Текстовый редактор: Notepad++
-Сборщик проекта: Gradle 7.5
++ OC: Windows 10
++ Текстовый редактор: Notepad++
++ Сборщик проекта: Gradle 7.5
 
 Инструкция по запуску:
 1. Приложение нужно собрать, для чего в консоли откройте папку с проектом и введите gradlew build
