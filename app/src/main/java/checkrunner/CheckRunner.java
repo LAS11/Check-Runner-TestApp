@@ -1,9 +1,9 @@
-package com.las11.checkrunner;
+package checkrunner;
 
-import com.las11.checkrunner.ArgsListChecker;
-import com.las11.checkrunner.Check;
-import com.las11.checkrunner.DirectorDefault;
-import com.las11.checkrunner.CheckBuilderDefault;
+import checkrunner.ArgsListChecker;
+import checkrunner.Check;
+import checkrunner.DirectorDefault;
+import checkrunner.CheckBuilderDefault;
 
 
 public class CheckRunner {

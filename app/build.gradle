@@ -31,7 +31,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.las11.checkrunner.CheckRunner'
+    mainClass = 'checkrunner.CheckRunner'
 }
 
 tasks.named('test') {

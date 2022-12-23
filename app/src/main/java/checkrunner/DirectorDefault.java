@@ -1,4 +1,4 @@
-package com.las11.checkrunner;
+package checkrunner;
 
 class DirectorDefault {
 	

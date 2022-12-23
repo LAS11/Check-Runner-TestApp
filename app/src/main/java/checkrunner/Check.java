@@ -1,6 +1,6 @@
-package com.las11.checkrunner;
+package checkrunner;
 
-import com.las11.checkrunner.ProductsDB;
+import checkrunner.ProductsDB;
 
 class Check {
 	

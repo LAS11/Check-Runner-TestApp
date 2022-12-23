@@ -1,6 +1,6 @@
-package com.las11.checkrunner;
+package checkrunner;
 
-import com.las11.checkrunner.CheckBuilder;
+import checkrunner.CheckBuilder;
 import java.io.*;
 
 class CheckBuilderDefault implements CheckBuilder  {
