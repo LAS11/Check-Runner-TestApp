@@ -1,7 +1,5 @@
 package checkrunner;
 
-import checkrunner.ProductsDB;
-
 class Check {
 	
 	private int[][] productsList;

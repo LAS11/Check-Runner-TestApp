@@ -1,11 +1,5 @@
 package checkrunner;
 
-import checkrunner.ArgsListChecker;
-import checkrunner.Check;
-import checkrunner.DirectorDefault;
-import checkrunner.CheckBuilderDefault;
-
-
 public class CheckRunner {
     public static void main(String[] args) throws Exception{
 		
@@ -20,14 +14,15 @@ public class CheckRunner {
 		int items[][] = argsChecker.generateItemsList(itemsSize);
 		
 		Check check = new Check(items);
+		
 		CheckBuilderDefault builder = new CheckBuilderDefault();
-
-		DirectorDefault director = new DirectorDefault();
-		director.printDefaultCheck(builder, check);
+		DirectorPrinterDefault printer = new DirectorPrinterDefault();
+		printer.printDefaultCheck(builder, check);
 		
 		String path = "D://check.txt";
-		DirectorToFileDefault directorFile = new DirectorToFileDefault();
-		directorFile.printDefaultCheck(builder, check, path);
+		CheckWriter writer = new CheckWriter();
+		DirectorWriterDefault directorFile = new DirectorWriterDefault();
+		directorFile.printDefaultCheck(writer, check, path);
 
     }
 	
