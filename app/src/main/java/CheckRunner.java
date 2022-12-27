@@ -1,4 +1,9 @@
-package checkrunner;
+import checkrunner.ArgsListChecker;
+import checkrunner.Check;
+import checkrunner.CheckBuilderDefault;
+import checkrunner.CheckWriter;
+import checkrunner.DirectorPrinterDefault;
+import checkrunner.DirectorWriterDefault;
 
 public class CheckRunner {
     public static void main(String[] args) throws Exception{

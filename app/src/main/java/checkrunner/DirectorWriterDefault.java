@@ -2,9 +2,9 @@ package checkrunner;
 
 import java.io.*;
 
-class DirectorWriterDefault {
+public class DirectorWriterDefault {
 	
-	void printDefaultCheck(CheckWriter writer, Check check, String path) throws Exception {
+	public void printDefaultCheck(CheckWriter writer, Check check, String path) throws Exception {
 		
 		FileWriter fw = new FileWriter(path);
 		

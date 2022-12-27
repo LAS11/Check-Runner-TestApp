@@ -1,8 +1,8 @@
 package checkrunner;
 
-class DirectorPrinterDefault {
+public class DirectorPrinterDefault {
 	
-	void printDefaultCheck(CheckBuilderDefault builder, Check check) {
+	public void printDefaultCheck(CheckBuilderDefault builder, Check check) {
 		builder.addStoreName("ООО Магазин Дефолт");
 		builder.addStoreAddress("ул. Пушкина д. Колотушкина");
 		builder.addStorePhone("111-222-333");

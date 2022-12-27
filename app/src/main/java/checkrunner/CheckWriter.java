@@ -2,7 +2,7 @@ package checkrunner;
 
 import java.io.*;
 
-class CheckWriter implements CheckBuilder  {
+public class CheckWriter implements CheckBuilder  {
 	
 	public void addGreetingLine(String s, FileWriter fw) throws Exception {
 		fw.write(s + "\n");

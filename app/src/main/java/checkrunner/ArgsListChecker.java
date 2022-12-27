@@ -1,6 +1,6 @@
 package checkrunner;
 
-class ArgsListChecker {
+public class ArgsListChecker {
 	
 	private String[] args;
 	
@@ -8,11 +8,11 @@ class ArgsListChecker {
 		args = a;
 	}
 	
-	boolean isArgsListEmpty() {
+	public boolean isArgsListEmpty() {
 		return (args.length == 0) ? true : false;
 	}
 	
-	int getAmountOfDiscountCards() {
+	public int getAmountOfDiscountCards() {
 		int cardsAmount = 0;
 		for (String arg: args) {
 			if (arg.startsWith("card-")) {
@@ -22,7 +22,7 @@ class ArgsListChecker {
 		return cardsAmount;
 	}
 	
-	int getLastDiscountCard() {
+	public int getLastDiscountCard() {
 		int cardNum = -1;
 		
 		for (String arg: args) {
@@ -36,7 +36,7 @@ class ArgsListChecker {
 		return cardNum;
 	}
 	
-	int[][] generateItemsList(int itemsSize) {
+	public int[][] generateItemsList(int itemsSize) {
 		if (args.length == 0) {
 			int[][] items = {{-1, -1}};
 			return items;

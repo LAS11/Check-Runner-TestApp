@@ -2,7 +2,7 @@ package checkrunner;
 
 import java.io.*;
 
-class CheckBuilderDefault implements CheckBuilder  {
+public class CheckBuilderDefault implements CheckBuilder  {
 	
 	public void addGreetingLine(String s) {
 		System.out.printf("%30s\n", s);

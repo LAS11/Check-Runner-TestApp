@@ -1,6 +1,6 @@
 package checkrunner;
 
-class Check {
+public class Check {
 	
 	private int[][] productsList;
 	private double total;
