@@ -9,7 +9,12 @@ public class ArgsListChecker {
 	}
 	
 	public boolean isArgsListEmpty() {
-		return (args.length == 0) ? true : false;
+		if (args.length == 0) {
+			return true;
+		} else if (args.length == 1 && args[0].startsWith("card-")) {
+			return true;
+		}
+		return false;
 	}
 	
 	public int getAmountOfDiscountCards() {
@@ -50,8 +55,8 @@ public class ArgsListChecker {
 				if (idQuantity.length == 2) {
 					//если пара id-quantity будет состоять не из чисел - генерирование чека прекратится из-за возникшей ошибки
 					try {
-						items[j][0] = Integer.parseInt(idQuantity[0]);
-						items[j][1] = Integer.parseInt(idQuantity[1]);
+						items[j][0] = Integer.parseInt(idQuantity[0]); //id
+						items[j][1] = Integer.parseInt(idQuantity[1]); //quantity
 						j++;
 					} catch (ArrayIndexOutOfBoundsException e) {
 						System.out.println("Error! Can't fit an item into the array of items, check the code!");

@@ -1,8 +1,8 @@
 package checkrunner;
 
-class ProductsDB {
+class ProductDB {
 	
-	private String[][] itemsDb = {
+	private String[][] items = {
 		{"0", "3.99", "Кукурузные хлопья"}, 
 		{"1", "1.27", "Пакет молока"}, 
 		{"2", "1.64", "Сметана"}, 
@@ -54,11 +54,11 @@ class ProductsDB {
 	};
 	
 	double getIdPrice(int id) {
-		return Double.parseDouble(this.itemsDb[id][1]);
+		return Double.parseDouble(this.items[id][1]);
 	}
 
 	String getIdName(int id) {
-		return this.itemsDb[id][2];
+		return this.items[id][2];
 	}
 	
 

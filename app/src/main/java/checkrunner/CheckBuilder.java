@@ -47,6 +47,17 @@ interface CheckBuilder {
 	default void addTaxTotal(String s) {
 		System.out.println(s);
 	}
+	
+	default void addTotalDiscounted(String s) {
+		System.out.println(s);
+	}
+	default void addDiscountCard(String s) {
+		System.out.println(s);
+	}
+	default void addDiscountPercent(String s) {
+		System.out.println(s);
+	}
+	
 	default void addEmptyLine() {
 		System.out.println();
 	}

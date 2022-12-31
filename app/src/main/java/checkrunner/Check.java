@@ -4,33 +4,77 @@ public class Check {
 	
 	private int[][] productsList;
 	private double total;
+	private double totalDiscounted;
 	
-	ProductsDB database = new ProductsDB();
+	private int discount = 0;
+	private int card = -1;
+	private boolean isCardPresented = false;
+	
+	ProductDB productsDB = new ProductDB();
+	CardDB cardsDB = new CardDB();
+	
+	public Check() {
+		
+	}
 	
 	public Check(int[][] i) {
 		productsList = i;
-		calcTotal();
+		isCardPresented = false;
+		card = -1;
+		discount = 0;
+		calcTotal(discount);
 	}
 	
-	private void calcTotal() {
-		for (int i = 0; i < productsList.length; i++) {
-			this.total += getProductPrice(productsList[i][0]) * productsList[i][1];
-		}
-		String totalStrRound = String.format("%.2f", this.total);
+	public Check(int[][] i, int c) {
+		productsList = i;
+		card = c;
+		isCardPresented = true;
+		discount = cardsDB.getCardDiscount(card);
+		calcTotal(discount);
+	}
+	
+	//округление до 2-х знаков после запятой
+	private double round(double t) {
+		String totalStrRound = String.format("%.2f", t);
 		totalStrRound = totalStrRound.replace(',', '.');
-		this.total = Double.parseDouble(totalStrRound);
+		return Double.parseDouble(totalStrRound);
 	}
 	
-	double getProductPrice(int i) {
-		return database.getIdPrice(i);
+	private void calcTotal(int disc) {
+		for (int i = 0; i < productsList.length; i++) {
+			total += getProductPrice(i) * getProductQuantity(i);
+		}
+		total = round(total);
+		
+		if (disc != 0) {
+			System.out.println(totalDiscounted);
+			totalDiscounted = (double) total - (total * (disc/100.0));
+			totalDiscounted = round(totalDiscounted);
+		} else {
+			totalDiscounted = total;
+		}
 	}
 	
-	String getProductName(int i) {
-		return database.getIdName(productsList[i][0]);
+	String getProductName(int id) {
+		return productsDB.getIdName(productsList[id][0]);
 	}
-	
+	double getProductPrice(int id) {
+		return productsDB.getIdPrice(productsList[id][0]);
+	}
 	int getProductQuantity(int i) {
 		return productsList[i][1];
+	}
+	
+	boolean getCardPresence() {
+		return isCardPresented;
+	}
+	
+	int getDiscount() {
+		return discount;
+	}
+	
+	int getDiscountCard() {
+		return card;
 	}
 	
 	void printTotal() {
@@ -38,12 +82,19 @@ public class Check {
 	}
 	
 	double getTotal() {
-		return this.total;
+		return total;
+	}
+	
+	double getTotalDiscounted() {
+		return totalDiscounted;
 	}
 	
 	void setCheckItems(int[][] i) {
 		productsList = i;
-		calcTotal();
+	}
+	
+	void setCard(int c) {
+		card = c;
 	}
 	
 	int[][] getCheckItems() {

@@ -61,6 +61,18 @@ public class CheckBuilderDefault implements CheckBuilder  {
 	public void addTaxTotal(String s) {
 		System.out.println(s);
 	}
+	
+	public void addTotalDiscounted(String s) {
+		System.out.println(s);
+	}
+	
+	public void addDiscountCard(String s) {
+		System.out.println(s);
+	}
+	
+	public void addDiscountPercent(String s) {
+		System.out.println(s);
+	}
 
 	public void addEmptyLine() {
 		System.out.println("");
