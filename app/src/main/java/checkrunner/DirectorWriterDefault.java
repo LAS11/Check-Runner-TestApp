@@ -17,14 +17,27 @@ public class DirectorWriterDefault {
 		
 		for (int i = 0; i < check.getCheckItems().length; i++) {
 			double totalForItems = check.getProductQuantity(i) * check.getProductPrice(i);
-			String[] item = {Integer.toString(check.getProductQuantity(i)), check.getProductName(i), Double.toString(check.getProductPrice(i)), Double.toString(totalForItems)};
+			
+			String[] item = {Integer.toString(check.getProductQuantity(i)), 
+								check.getProductName(i), 
+								Double.toString(check.getProductPrice(i)), 
+								Double.toString(totalForItems), 
+								check.getProductPromoStatus(i)
+							};
 			writer.addItem(item, fw);
 		}
 		
 		writer.addDividerLine("------------------------------------------------", fw);
 		writer.addTotalWithoutTax("ИТОГО: " + Double.toString(check.getTotal()), fw);
-		writer.addThanksLine("СПАСИБО ЗА ПОКУПКУ!", fw);
 		
+		if (check.getCardPresence()) {
+			writer.addDividerLine("------------------------------------------------", fw);	
+			writer.addDiscountCard("ПРЕДЪЯВЛЕНА СКИДОЧНАЯ КАРТА №" + check.getDiscountCard(), fw);
+			writer.addTotalDiscounted("ИТОГО (С УЧЁТОМ СКИДКИ " + check.getDiscount() + "%): " + Double.toString(check.getTotalDiscounted()), fw);
+			writer.addDividerLine("------------------------------------------------", fw);	
+		}
+		
+		writer.addThanksLine("СПАСИБО ЗА ПОКУПКУ!", fw);
 		fw.close();
 	}
 }

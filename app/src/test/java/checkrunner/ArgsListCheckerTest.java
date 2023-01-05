@@ -1,4 +1,4 @@
-package com.las11.checkrunner;
+package checkrunner;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

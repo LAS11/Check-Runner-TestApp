@@ -46,7 +46,22 @@ public class CheckBuilderDefault implements CheckBuilder  {
 	}
 
 	public void addItem(String[] s) {
-		System.out.printf("%3s     %-27s %-3s %6s%n", s[0], s[1], s[2], s[3]);
+		/*
+			s[0] - количество товара
+			s[1] - название товара
+			s[2] - цена за единицу товара
+			s[3] - цена за весь товар
+			s[4] - является ли автор акционным
+		*/
+
+		String item = String.format("%3s     %-27s %-3s %6.02f", s[0], s[1], s[2], Double.parseDouble(s[3])).replace(',', '.');
+		System.out.println(item);
+		
+		if (s[4] == "1" && Integer.parseInt(s[0]) >= ProductsDB.getPromoCount()) {
+			double priceWithPromoDiscount = Double.parseDouble(s[3]) * ProductsDB.getPromoDiscountMultiplier();
+			System.out.printf("(Акция! 10шт товара = скидка -10%%): %11s%n", priceWithPromoDiscount);
+			System.out.println();
+		}
 	}
 
 	public void addTax(String s) {
@@ -55,7 +70,8 @@ public class CheckBuilderDefault implements CheckBuilder  {
 
 	public void addTotalWithoutTax(String s) {
 		String[] total = s.split(" ");
-		System.out.printf("%s %40s%n", total[0], total[1]);
+		String totalStr = String.format("%s %40.02f", total[0], Double.parseDouble(total[1])).replace(',', '.');
+		System.out.println(totalStr);
 	}
 
 	public void addTaxTotal(String s) {
@@ -63,11 +79,20 @@ public class CheckBuilderDefault implements CheckBuilder  {
 	}
 	
 	public void addTotalDiscounted(String s) {
-		System.out.println(s);
+		int dividerIndex = s.indexOf(":") + 1;
+		double price = Double.parseDouble(s.substring(dividerIndex));
+		String text = s.substring(0, dividerIndex);
+		String totalStr = String.format("%s%20.02f", text, price).replace(',', '.');
+
+		System.out.println(totalStr);
 	}
 	
 	public void addDiscountCard(String s) {
-		System.out.println(s);
+		int dividerIndex = s.indexOf("№") + 1;
+		int code = Integer.parseInt(s.substring(dividerIndex));
+		String text = s.substring(0, dividerIndex);
+		
+		System.out.printf("%s%04d%n", text, code);
 	}
 	
 	public void addDiscountPercent(String s) {

@@ -1,9 +1,9 @@
 package checkrunner;
 
-class CardDB {
+class CardsDB {
 	
 	//номер карты, процент скидки
-	private int cards[][] = {
+	private static final int cards[][] = {
 		{2600, 4},
 		{1031, 4}, 
 		{8951, 4}, 
@@ -102,7 +102,7 @@ class CardDB {
 		{6034, 4},
 	};
 	
-	int getCardDiscount(int cardNumCurr) {
+	static int getCardDiscount(int cardNumCurr) {
 		for (int i = 0; i < cards.length; i++) {
 			if (cardNumCurr == cards[i][0]) {
 				return cards[i][1];

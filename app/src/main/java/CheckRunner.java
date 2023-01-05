@@ -31,12 +31,11 @@ public class CheckRunner {
 		DirectorPrinterDefault printer = new DirectorPrinterDefault();
 		printer.printDefaultCheck(builder, check);
 		
-		/*
-		String path = "D://check.txt";
+		
+		String path = "check.txt"; //чек сохранится в папке, где хранится программа
 		CheckWriter writer = new CheckWriter();
 		DirectorWriterDefault directorFile = new DirectorWriterDefault();
 		directorFile.printDefaultCheck(writer, check, path);
-		*/
 
     }
 	

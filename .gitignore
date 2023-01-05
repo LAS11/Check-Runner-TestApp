@@ -7,3 +7,4 @@ build
 run cmd.bat
 cardsList.txt
 itemsList.txt
+app/check.txt

@@ -10,9 +10,6 @@ public class Check {
 	private int card = -1;
 	private boolean isCardPresented = false;
 	
-	ProductDB productsDB = new ProductDB();
-	CardDB cardsDB = new CardDB();
-	
 	public Check() {
 		
 	}
@@ -29,12 +26,12 @@ public class Check {
 		productsList = i;
 		card = c;
 		isCardPresented = true;
-		discount = cardsDB.getCardDiscount(card);
+		discount = CardsDB.getCardDiscount(card);
 		calcTotal(discount);
 	}
 	
 	//округление до 2-х знаков после запятой
-	private double round(double t) {
+	static double round(double t) {
 		String totalStrRound = String.format("%.2f", t);
 		totalStrRound = totalStrRound.replace(',', '.');
 		return Double.parseDouble(totalStrRound);
@@ -42,8 +39,14 @@ public class Check {
 	
 	private void calcTotal(int disc) {
 		for (int i = 0; i < productsList.length; i++) {
-			total += getProductPrice(i) * getProductQuantity(i);
+			double productPrice = getProductPrice(i) * getProductQuantity(i);
+			
+			if (getProductPromoStatus(i) == "1" && getProductQuantity(i) >= ProductsDB.getPromoCount()) {
+				productPrice *= getPromoDiscountMultiplier();
+			}
+			total += productPrice;
 		}
+		
 		total = round(total);
 		
 		if (disc != 0) {
@@ -56,11 +59,21 @@ public class Check {
 	}
 	
 	String getProductName(int id) {
-		return productsDB.getIdName(productsList[id][0]);
+		return ProductsDB.getIdName(productsList[id][0]);
 	}
+	
 	double getProductPrice(int id) {
-		return productsDB.getIdPrice(productsList[id][0]);
+		return ProductsDB.getIdPrice(productsList[id][0]);
 	}
+	
+	String getProductPromoStatus(int id) {
+		return ProductsDB.getIdPromoStatus(productsList[id][0]);
+	}
+	
+	double getPromoDiscountMultiplier() {
+		return ProductsDB.getPromoDiscountMultiplier();
+	}
+	
 	int getProductQuantity(int i) {
 		return productsList[i][1];
 	}
