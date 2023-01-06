@@ -39,9 +39,9 @@ public class Check {
 	
 	private void calcTotal(int disc) {
 		for (int i = 0; i < productsList.length; i++) {
-			double productPrice = getProductPrice(i) * getProductQuantity(i);
+			double productPrice = getProductPrice(i) * getProductQuantity(i);	
 			
-			if (getProductPromoStatus(i) == "1" && getProductQuantity(i) >= ProductsDB.getPromoCount()) {
+			if (getProductPromoStatus(i) == 1 && getProductQuantity(i) >= ProductsDB.getPromoCount()) {
 				productPrice *= getPromoDiscountMultiplier();
 			}
 			total += productPrice;
@@ -50,7 +50,6 @@ public class Check {
 		total = round(total);
 		
 		if (disc != 0) {
-			System.out.println(totalDiscounted);
 			totalDiscounted = (double) total - (total * (disc/100.0));
 			totalDiscounted = round(totalDiscounted);
 		} else {
@@ -66,7 +65,7 @@ public class Check {
 		return ProductsDB.getIdPrice(productsList[id][0]);
 	}
 	
-	String getProductPromoStatus(int id) {
+	int getProductPromoStatus(int id) {
 		return ProductsDB.getIdPromoStatus(productsList[id][0]);
 	}
 	

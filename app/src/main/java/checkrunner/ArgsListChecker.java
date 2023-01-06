@@ -11,20 +11,32 @@ public class ArgsListChecker {
 	public boolean isArgsListEmpty() {
 		if (args.length == 0) {
 			return true;
-		} else if (args.length == 1 && args[0].startsWith("card-")) {
+		} else if (args.length == 1 && args[0].startsWith("card-") || args[0].startsWith("cards=") || args[0].startsWith("products=")) {
 			return true;
 		}
 		return false;
 	}
 	
-	public int getAmountOfDiscountCards() {
-		int cardsAmount = 0;
+	public String getDatabasePath(String param) {
+		String path = "";
+		if (param != "" && param != " ") {
+			for (String arg: args) {
+				if (arg.startsWith(param + "=")) {
+					path = arg.substring(arg.lastIndexOf("=") + 1);
+				}
+			}	
+		}
+		return path;
+	}
+	
+	public int getParamAmount(String param) {
+		int amount = 0;
 		for (String arg: args) {
-			if (arg.startsWith("card-")) {
-				cardsAmount++;
+			if (arg.startsWith(param)) {
+				amount++;
 			}
 		}
-		return cardsAmount;
+		return amount;
 	}
 	
 	public int getLastDiscountCard() {
@@ -32,9 +44,13 @@ public class ArgsListChecker {
 		
 		for (String arg: args) {
 			if (arg.startsWith("card-")) {
-				String cardNumString = arg.substring(arg.lastIndexOf("-") + 1);
-				//если номер карточки будет не числом - генерирование чека прекратится из-за возникшей ошибки
-				cardNum = Integer.parseInt(cardNumString);
+				try {
+					String cardNumString = arg.substring(arg.lastIndexOf("-") + 1);
+					cardNum = Integer.parseInt(cardNumString);
+				} catch (NumberFormatException e) {
+					System.out.println("Код скидочной карты содержит недопустимые символы, она будет проигнорирована!");
+					continue;
+				}
 			}
 		}
 		
@@ -50,22 +66,25 @@ public class ArgsListChecker {
 		int[][] items = new int[itemsSize][2];
 		
 		for (int i = 0, j = 0; i < args.length; i++) {
-			if (!args[i].startsWith("card-")) {
+			if (!args[i].startsWith("card-") && !args[i].startsWith("cards=") && !args[i].startsWith("products=")) {
 				String[] idQuantity = args[i].split("-");
 				if (idQuantity.length == 2) {
-					//если пара id-quantity будет состоять не из чисел - генерирование чека прекратится из-за возникшей ошибки
 					try {
 						items[j][0] = Integer.parseInt(idQuantity[0]); //id
 						items[j][1] = Integer.parseInt(idQuantity[1]); //quantity
 						j++;
 					} catch (ArrayIndexOutOfBoundsException e) {
-						System.out.println("Error! Can't fit an item into the array of items, check the code!");
+						System.out.println("Ошибка! Попытка добавить элемент в переполненный массив, проверьте код!");
+						items[j] = new int[] {-1, -1};
+						j++;
+					} catch (NumberFormatException e) {
+						System.out.println("Ошибка! Недопустимые символы в id и/или количестве товаров!");
 						items[j] = new int[] {-1, -1};
 						j++;
 					}
 				}
 				else {
-					System.out.println("Error! There is a strange pair id-price consists more than of 2 items in the list!");
+					System.out.println("Ошибка! В списке обнаружена странная пара параметров \"id-количество\", состоящая более чем из 2-х элементов!");
 					items[j] = new int[] {-1, -1};
 				}
 			}

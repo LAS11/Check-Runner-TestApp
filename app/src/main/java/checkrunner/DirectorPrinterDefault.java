@@ -18,7 +18,7 @@ public class DirectorPrinterDefault {
 								check.getProductName(i), 
 								Double.toString(check.getProductPrice(i)), 
 								Double.toString(totalForItems),
-								check.getProductPromoStatus(i)
+								Integer.toString(check.getProductPromoStatus(i))
 							};
 			builder.addItem(item);
 		}

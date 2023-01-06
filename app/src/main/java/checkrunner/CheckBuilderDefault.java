@@ -42,7 +42,8 @@ public class CheckBuilderDefault implements CheckBuilder  {
 
 	public void addHeaderList(String s) {
 		String[] headers = s.split(" ");
-		System.out.printf("%3s  %-15s %16s %6s%n", headers[0], headers[1], headers[2], headers[3]);
+		System.out.printf("%3s  %-15s %16s %6s%n", headers[0], headers[1], 
+													headers[2], headers[3]);
 	}
 
 	public void addItem(String[] s) {
@@ -57,9 +58,9 @@ public class CheckBuilderDefault implements CheckBuilder  {
 		String item = String.format("%3s     %-27s %-3s %6.02f", s[0], s[1], s[2], Double.parseDouble(s[3])).replace(',', '.');
 		System.out.println(item);
 		
-		if (s[4] == "1" && Integer.parseInt(s[0]) >= ProductsDB.getPromoCount()) {
+		if (Integer.parseInt(s[4]) == 1 && Integer.parseInt(s[0]) >= ProductsDB.getPromoCount()) {
 			double priceWithPromoDiscount = Double.parseDouble(s[3]) * ProductsDB.getPromoDiscountMultiplier();
-			System.out.printf("(Акция! 10шт товара = скидка -10%%): %11s%n", priceWithPromoDiscount);
+			System.out.printf("Акция! 10шт товара = скидка -10%% %14s%n", priceWithPromoDiscount);
 			System.out.println();
 		}
 	}
@@ -89,6 +90,7 @@ public class CheckBuilderDefault implements CheckBuilder  {
 	
 	public void addDiscountCard(String s) {
 		int dividerIndex = s.indexOf("№") + 1;
+		
 		int code = Integer.parseInt(s.substring(dividerIndex));
 		String text = s.substring(0, dividerIndex);
 		

@@ -22,7 +22,7 @@ public class DirectorWriterDefault {
 								check.getProductName(i), 
 								Double.toString(check.getProductPrice(i)), 
 								Double.toString(totalForItems), 
-								check.getProductPromoStatus(i)
+								Integer.toString(check.getProductPromoStatus(i))
 							};
 			writer.addItem(item, fw);
 		}

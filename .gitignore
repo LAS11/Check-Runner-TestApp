@@ -5,6 +5,6 @@
 build
 
 run cmd.bat
-cardsList.txt
-itemsList.txt
+cards_orig.txt
+products_orig.txt
 app/check.txt
